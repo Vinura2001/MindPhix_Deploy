@@ -1,39 +1,38 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import joblib
-from model import get_recommendation  # Import the get_recommendation function
+from flask import Flask,request,render_template,url_for
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+import joblib as joblib
+import os
 
-app = Flask(__name__)
-CORS(app)
+model=joblib.load('iris_model_LR.pkl')
+scaler=joblib.load('scaler.save')
 
-# Load your trained model
-model = joblib.load('model.joblib')
+app =Flask(__name__)
 
-@app.route('/predict', methods=['POST', 'GET'])
-def give_prediction():
-    # Get form data from the request
-    depression_level = request.form.get('depression_level')
-    mood_level = request.form.get('mood_level')
-    gender = request.form.get('gender')
-    age_str = request.form.get('age')
-    category = request.form.get('category')
+IMG_FOLDER=os.path.join('static','IMG')
+app.config['UPLOAD_FOLDER']=IMG_FOLDER
 
-    # Handle the case where age is None or an empty string
-    if age_str is None or age_str.strip() == '':
-        # Handle the missing or invalid age value (e.g., return an error or use a default value)
-        return jsonify({'error': 'Age is required and must be a valid integer.'}), 400
 
-    try:
-        age = int(age_str)
-    except ValueError:
-        # Handle the case where age cannot be converted to an integer
-        return jsonify({'error': 'Age must be a valid integer.'}), 400
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-    # Call the imported get_recommendation function with the form data
-    recommendation = get_recommendation(depression_level, mood_level, gender, age, category)
+@app.route('/',methods=['GET','POST'])
+def home():
+    if request.method =='POST':
+        sl=request.form['SepalLength']
+        sw = request.form['SepalWidth']
+        pl = request.form['PetalLength']
+        pw = request.form['PetalWidth']
+        data = np.array([[sl, sw, pl, pw]])
+        x = scaler.transform(data)
+        print(x)
+        prediction = model.predict(x)
+        print(prediction)
+        image=prediction[0]+'.png'
+        image=os.path.join(app.config['UPLOAD_FOLDER'],image)
+    return render_template('index.html',prediction=prediction[0],image=image)
 
-    # Return the recommendation as JSON
-    return jsonify({'recommendation': recommendation})
 
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    app.run(debug=True)
