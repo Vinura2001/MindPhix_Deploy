@@ -3,3 +3,5 @@ numpy
 flask
 joblib
 scikit-learn
+Flask-Cors
+pandas

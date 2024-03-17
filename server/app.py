@@ -19,19 +19,7 @@ def index():
 
 @app.route('/',methods=['GET','POST'])
 def home():
-    if request.method =='POST':
-        sl=request.form['SepalLength']
-        sw = request.form['SepalWidth']
-        pl = request.form['PetalLength']
-        pw = request.form['PetalWidth']
-        data = np.array([[sl, sw, pl, pw]])
-        x = scaler.transform(data)
-        print(x)
-        prediction = model.predict(x)
-        print(prediction)
-        image=prediction[0]+'.png'
-        image=os.path.join(app.config['UPLOAD_FOLDER'],image)
-    return render_template('index.html',prediction=prediction[0],image=image)
+    
 
 
 if __name__ == '__main__':
