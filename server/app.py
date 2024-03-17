@@ -6,15 +6,13 @@ import os
 
 app =Flask(__name__)
 
-model=joblib.load('model.joblib')
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/',methods=['GET','POST'])
-def home():
+def give_prediction():
     # Get form data from the request
     depression_level = request.form.get('depression_level')
     mood_level = request.form.get('mood_level')
