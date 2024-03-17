@@ -24,5 +24,3 @@ def give_prediction():
     # Return the recommendation as JSON
     return jsonify({'recommendation': recommendation})
 
-if __name__ == '__main__':
-    app.run(port=8080, debug=True)
