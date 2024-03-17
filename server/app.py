@@ -9,14 +9,25 @@ CORS(app)
 # Load your trained model
 model = joblib.load('model.joblib')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST', 'GET'])
 def give_prediction():
     # Get form data from the request
     depression_level = request.form.get('depression_level')
     mood_level = request.form.get('mood_level')
     gender = request.form.get('gender')
-    age = int(request.form.get('age'))
+    age_str = request.form.get('age')
     category = request.form.get('category')
+
+    # Handle the case where age is None or an empty string
+    if age_str is None or age_str.strip() == '':
+        # Handle the missing or invalid age value (e.g., return an error or use a default value)
+        return jsonify({'error': 'Age is required and must be a valid integer.'}), 400
+
+    try:
+        age = int(age_str)
+    except ValueError:
+        # Handle the case where age cannot be converted to an integer
+        return jsonify({'error': 'Age must be a valid integer.'}), 400
 
     # Call the imported get_recommendation function with the form data
     recommendation = get_recommendation(depression_level, mood_level, gender, age, category)
