@@ -4,11 +4,10 @@ from sklearn.preprocessing import StandardScaler
 import joblib as joblib
 import os
 
+model=joblib.load('model.joblib')
+scaler=joblib.load('scaler.save')
 
 app =Flask(__name__)
-
-# Load your trained model
-model = joblib.load('model.joblib')
 
 IMG_FOLDER=os.path.join('static','IMG')
 app.config['UPLOAD_FOLDER']=IMG_FOLDER
