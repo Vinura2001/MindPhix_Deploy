@@ -19,7 +19,7 @@ def index():
 
 @app.route('/',methods=['GET','POST'])
 def home():
-    
+    print(hello)
 
 
 if __name__ == '__main__':
