@@ -1,7 +1,6 @@
 from flask import Flask,request,render_template,url_for
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from flask_cors import CORS
 import joblib as joblib
 import os
 
@@ -9,7 +8,6 @@ model=joblib.load('iris_model_LR.pkl')
 scaler=joblib.load('scaler.save')
 
 app =Flask(__name__)
-CORS(app)
 
 # Load your trained model
 model = joblib.load('model.joblib')
