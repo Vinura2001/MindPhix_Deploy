@@ -1,10 +1,11 @@
 from flask import Flask,request,render_template, jsonify
-import numpy as np
+
 from sklearn.preprocessing import StandardScaler
-import joblib as joblib
-import os
+
+from flask_cors import CORS
 
 app =Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
