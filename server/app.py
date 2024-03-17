@@ -1,11 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask,request,render_template, jsonify
+from sklearn.preprocessing import StandardScaler
 from flask_cors import CORS
-from model import get_recommendation  # Import the get_recommendation function
+from model import get_recommendation
 
-app = Flask(__name__)
+app =Flask(__name__)
 CORS(app)
 
-@app.route('/predict', methods=['POST', 'GET'])
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/',methods=['GET','POST'])
 def give_prediction():
     # Get form data from the request
     depression_level = request.form.get('depression_level')
@@ -31,5 +37,6 @@ def give_prediction():
     # Return the recommendation as JSON
     return jsonify({'recommendation': recommendation})
 
+
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    app.run(debug=True)
