@@ -1,50 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Recommendation Form</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     background-color: #f5f5f5;
+   }
 
-    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iris Classification</title>
+   .container {
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+     max-width: 500px;
+     width: 100%;
+   }
+
+   h1 {
+     text-align: center;
+     margin-bottom: 20px;
+   }
+
+   .form-group {
+     margin-bottom: 20px;
+   }
+
+   label {
+     display: block;
+     font-weight: bold;
+     margin-bottom: 5px;
+   }
+
+   select,
+   input[type="number"] {
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+   }
+
+   button {
+     display: block;
+     width: 100%;
+     padding: 10px;
+     background-color: #4caf50;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     font-weight: bold;
+   }
+
+   button:hover {
+     background-color: #45a049;
+   }
+
+   .recommendation {
+     margin-top: 20px;
+     text-align: center;
+   }
+
+   .recommendation p {
+     margin-bottom: 10px;
+   }
+
+   .recommendation a {
+     color: #4caf50;
+     text-decoration: none;
+   }
+
+   .recommendation a:hover {
+     text-decoration: underline;
+   }
+ </style>
 </head>
 <body>
-   
-    <div class="container">
-        <!-- code here -->
-        <div class="card">
-            <div class="card-image">	
-                <h2 class="card-heading">
-                    Iris Classification
-                </h2>
-            </div>
-            <form class="card-form" action="{{ url_for('home')}}" method="POST">
-                <div class="input">
-                    <input name="SepalLength" type="number" step="any"  class="input-field" required/>
-                    <label  class="input-label"> Sepal Length in cm</label>
-                </div>
-                            <div class="input">
-                    <input name="SepalWidth" type="number" step="any"  class="input-field" required/>
-                    <label  class="input-label">Sepal Width in cm</label>
-                </div>
-                            <div class="input">
-                    <input name="PetalLength" type="number" step="any"  class="input-field" required/>
-                    <label  class="input-label">Petal Length in cm</label>
-                </div>
-                <div class="input">
-                    <input name="PetalWidth" type="number" step="any"  class="input-field" required/>
-                    <label  class="input-label">Petal Width in cm</label>
-                </div>
-                <div class="action">
-                    <button type="submit" class="action-button">Submit</button>
-                </div>
-            </form>
+ <div class="container">
+   <h1>Recommendation Form</h1>
+   <form>
+     <div class="form-group">
+       <label for="depression_level">Depression Level:</label>
+       <select id="depression_level" name="depression_level">
+         <option value="">Minimal</option>
+         <option value="">Mild</option>
+         <!-- Add options for depression levels here -->
+       </select>
+     </div>
 
-            <center><p style="color: darkred; font-weight: bold;">{{ prediction }}</p>
-		<img src="{{ image }}" alt="{{ prediction }}">
-</center>
-        </div>
-    </div>
-    
+     <div class="form-group">
+       <label for="mood_level">Mood Level:</label>
+       <select id="mood_level" name="mood_level">
+         <option value="">Select Current Mood</option>
+         <option value="">Anxious</option>
+         <!-- Add options for mood levels here -->
+       </select>
+     </div>
+
+     <div class="form-group">
+       <label for="gender">Gender:</label>
+       <select id="gender" name="gender">
+         <option value="">Select Gender</option>
+         <option value="">Male</option>
+         <!-- Add options for genders here -->
+       </select>
+     </div>
+
+     <div class="form-group">
+       <label for="age">Age:</label>
+       <input type="number" id="age" name="age" min="1" max="65">
+     </div>
+
+     <div class="form-group">
+       <label for="category">Category:</label>
+       <select id="category" name="category">
+         <option value="">Select Category</option>
+         <option value="">Expressive Arts Therapy</option>
+         <!-- Add options for categories here -->
+       </select>
+     </div>
+
+     <button type="submit">Get Recommendation</button>
+   </form>
+
+   <div class="recommendation">
+     <p>Recommendation: <span id="recommendation"></span></p>
+     <p>Link: <a href="#" id="link" target="_blank"></a></p>
+   </div>
+ </div>
+
+ <script>
+   // Add your JavaScript code here to handle form submission and update the recommendation and link
+ </script>
 </body>
 </html>
