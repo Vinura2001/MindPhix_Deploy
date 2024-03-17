@@ -4,10 +4,9 @@ from sklearn.preprocessing import StandardScaler
 import joblib as joblib
 import os
 
-
+model = joblib.load('model.joblib')
 
 app =Flask(__name__)
-
 
 
 @app.route('/')
