@@ -3,8 +3,11 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 import joblib as joblib
 import os
+import gzip
+import pickle
 
-model=joblib.load('model.pkl.gz')
+with gzip.open('model.pkl.gz', 'rb') as file:
+    model = pickle.load(file)
 
 app =Flask(__name__)
 
