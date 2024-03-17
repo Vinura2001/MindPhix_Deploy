@@ -37,4 +37,4 @@ def handle_form():
         return jsonify({'recommendation': recommendation})
 
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    app.run(debug=True)
