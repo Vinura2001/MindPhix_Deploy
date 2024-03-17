@@ -1,8 +1,7 @@
 from flask import Flask,request,render_template, jsonify
-
 from sklearn.preprocessing import StandardScaler
-
 from flask_cors import CORS
+from model import get_recommendation
 
 
 app =Flask(__name__)
@@ -41,4 +40,4 @@ def give_prediction():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8080, debug=True)
