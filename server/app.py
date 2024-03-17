@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,url_for
+from flask import Flask,request, jsonify
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 import joblib as joblib
