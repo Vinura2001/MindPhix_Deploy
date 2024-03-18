@@ -2,7 +2,7 @@
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import LabelEncoder
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 
 
@@ -22,7 +22,7 @@ x_train, x_test, y_train, y_test = train_test_split(df[feature_columns], df[targ
 #Training the dataset using Random Forest Classifier Algorithm
 
 # Train a decision tree classifier
-model = RandomForestClassifier().fit(x_train, y_train)
+model = DecisionTreeClassifier().fit(x_train, y_train)
 
 #Mapping
 
